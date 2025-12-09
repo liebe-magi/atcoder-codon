@@ -1,5 +1,7 @@
 # AtCoder Codon Environment
 
+[日本語 (Japanese)](./README_ja.md)
+
 ![AtCoder 2025 Language Update Compliant](https://img.shields.io/badge/AtCoder-2025_Update_Compliant-green)
 
 A complete development environment for solving AtCoder problems using **Python 3.13** and **[Codon](https://github.com/exaloop/codon)** (a high-performance Python compiler).
