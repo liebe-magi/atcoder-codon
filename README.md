@@ -1,6 +1,6 @@
 # AtCoder Codon Environment
 
-[日本語 (Japanese)](./README_ja.md)
+[日本語版 (Japanese)](./README_ja.md)
 
 ![AtCoder 2025 Language Update Compliant](https://img.shields.io/badge/AtCoder-2025_Update_Compliant-green)
 
@@ -82,25 +82,49 @@ new abc300
 cd abc300/a
 ```
 
-### 2. Test Your Code
+### 2. Test Your Code (VS Code Commands)
 
-```bash
-# Simply run with python
-python main.py
+This environment comes with **Command Runner** configured. You can easily run build and test commands.
 
-# Test using oj tools (config included in tasks.json)
-# You can use VS Code Tasks: Terminal -> Run Task... -> Test
+- **Build**: `codon build` (Compiles current file to `a.out`)
+- **Test**: `oj test` (Runs `a.out` against test cases in `tests/`)
+
+You can run these from the Command Palette (`Ctrl+Shift+P` -> type "Run Command") or better yet, assign keybindings!
+
+#### Recommended Keybindings
+
+Open `keybindings.json` (Ctrl+K Ctrl+S -> Open Keyboard Shortcuts (JSON)) and add:
+
+```json
+[
+    {
+        "key": "ctrl+f5",
+        "command": "command-runner.run",
+        "args": { "command": "codon build" }
+    },
+    {
+        "key": "f5",
+        "command": "command-runner.run",
+        "args": { "command": "oj test" }
+    }
+]
 ```
 
-### 3. Compile & Run with Codon
+### 3. Submission (Important Notice)
+
+> [!WARNING]
+> **Automated submission via `oj` or `acc` is currently restricted.**
+>
+> Due to CAPTCHA protection introduced by AtCoder to prevent attacks, submitting code via command-line tools is generally not possible.
+> Please **submit your code manually** via the web browser.
+>
+> *Note: AtCoder may disable CAPTCHA during active Rated Contests, potentially allowing tools to work, but this is not guaranteed.*
+
+### 4. Codon Manual Usage
 
 ```bash
 # Compile and run
 codon run -release main.py
-
-# Only compile
-codon build -release -exe main.py
-./main
 ```
 
 ### directory Structure

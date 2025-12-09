@@ -80,25 +80,49 @@ new abc300
 cd abc300/a
 ```
 
-### 2. テストの実行
+### 2. コードのテスト (VS Code コマンド)
 
-```bash
-# 通常の Python として実行
-python main.py
+この環境には **Command Runner** が設定されており、ビルドやテストを簡単に実行できます。
 
-# oj tools を使ってテスト (tasks.json に設定済み)
-# VS Code の タスク: Terminal -> Run Task... -> Test
+- **Build**: `codon build` (現在のファイルを `a.out` にコンパイル)
+- **Test**: `oj test` (`a.out` を `tests/` 内のテストケースでテスト)
+
+これらはコマンドパレット (`Ctrl+Shift+P` -> "Run Command") から実行できますが、キーバインドを設定するとさらに便利です。
+
+#### 推奨キーバインド設定
+
+`keybindings.json` (Ctrl+K Ctrl+S -> キーボードショートカット (JSON) を開く) に以下を追加することをお勧めします：
+
+```json
+[
+    {
+        "key": "ctrl+f5",
+        "command": "command-runner.run",
+        "args": { "command": "codon build" }
+    },
+    {
+        "key": "f5",
+        "command": "command-runner.run",
+        "args": { "command": "oj test" }
+    }
+]
 ```
 
-### 3. Codon でのコンパイル・実行
+### 3. 提出について (重要なお知らせ)
+
+> [!WARNING]
+> **`oj` や `acc` による自動提出は現在制限されています。**
+>
+> AtCoderによる攻撃対策のためのCAPTCHA導入に伴い、コマンドラインツール経由でのソースコード提出は基本的にできません。
+> ブラウザから **手動で提出** してください。
+>
+> *※ Ratedコンテスト開催中などはCAPTCHAが一時的に無効化されツールが使える場合もありますが、保証はありません。*
+
+### 4. Codon の手動コンパイル
 
 ```bash
 # コンパイルして実行
 codon run -release main.py
-
-# コンパイルのみ
-codon build -release -exe main.py
-./main
 ```
 
 ## ディレクトリ構成
