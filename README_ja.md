@@ -52,15 +52,20 @@ VS Code が Docker イメージを取得し、環境を起動します。
 
 ### 4. AtCoder へのログイン (初回のみ)
 
-コンテナ内のターミナルで以下を実行します：
+CAPTCHAの導入により、通常のログインコマンド (`acc login`, `oj login`) は使用できません。代わりに、プリインストールされている **[aclogin](https://github.com/key-moon/aclogin)** ツールを使用します。
 
-```bash
-# atcoder-cli へのログイン
-acc login
-
-# online-judge-tools へのログイン
-oj login https://atcoder.jp/
-```
+1.  **ブラウザでログイン**: ブラウザで [AtCoder](https://atcoder.jp/) にログインします。
+2.  **セッションクッキーの取得**:
+    - 開発者ツール (`F12`) を開きます。
+    - **Application** (Firefoxなら Storage) タブ -> **Cookies** -> `https://atcoder.jp` を開きます。
+    - `REVEL_SESSION` という名前のクッキーを探します。
+    - その値をダブルクリックして**コピー**します。
+3.  **aclogin の実行**:
+    コンテナ内のターミナルで以下を実行します：
+    ```bash
+    aclogin
+    ```
+    プロンプトが表示されたら、コピーした `REVEL_SESSION` の値を貼り付けます。これにより、`acc` と `oj` の両方が認証されます。
 
 ## 使い方
 

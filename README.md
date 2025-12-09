@@ -52,15 +52,20 @@ VS Code will pull the Docker image and start the environment.
 
 ### 4. Login to AtCoder (First Time Only)
 
-Once inside the container terminal:
+Due to CAPTCHA protection, standard login commands (`acc login`, `oj login`) no longer work. Instead, use the pre-installed **[aclogin](https://github.com/key-moon/aclogin)** tool.
 
-```bash
-# Login to atcoder-cli
-acc login
-
-# Login to online-judge-tools
-oj login https://atcoder.jp/
-```
+1.  **Login in Browser**: Log in to [AtCoder](https://atcoder.jp/) using your browser.
+2.  **Get Session Cookie**:
+    - Open Developer Tools (`F12`).
+    - Go to **Application** (or Storage) tab -> **Cookies** -> `https://atcoder.jp`.
+    - Find the cookie named `REVEL_SESSION`.
+    - Double-click the Value and **copy** it.
+3.  **Run aclogin**:
+    Inside the container terminal, run:
+    ```bash
+    aclogin
+    ```
+    When prompted, paste the `REVEL_SESSION` value you copied. This will authenticate both `acc` and `oj`.
 
 ## Usage
 
