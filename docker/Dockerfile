@@ -51,8 +51,15 @@ RUN python3.13 -m pip install --break-system-packages online-judge-tools aclogin
 # 6. Install Libraries
 # Using requirements file approach can be cleaner, but straight pip install is fine for Dockerfile.
 # torch URL provided by user request
-RUN python3.13 -m pip install --break-system-packages \
-    https://download.pytorch.org/whl/cpu/torch-2.8.0%2Bcpu-cp313-cp313-manylinux_2_28_x86_64.whl \
+RUN if [ "$TARGETARCH" = "amd64" ]; then \
+    TORCH_URL="https://download.pytorch.org/whl/cpu/torch-2.8.0%2Bcpu-cp313-cp313-manylinux_2_28_x86_64.whl"; \
+    elif [ "$TARGETARCH" = "arm64" ]; then \
+    TORCH_URL="https://download.pytorch.org/whl/cpu/torch-2.8.0%2Bcpu-cp313-cp313-manylinux_2_28_aarch64.whl"; \
+    else \
+    TORCH_URL="https://download.pytorch.org/whl/cpu/torch-2.8.0%2Bcpu-cp313-cp313-manylinux_2_28_x86_64.whl"; \
+    fi && \
+    python3.13 -m pip install --break-system-packages \
+    "${TORCH_URL}" \
     CPyCppyy==1.13.0 \
     Cython==3.1.3 \
     Jinja2==3.1.6 \
