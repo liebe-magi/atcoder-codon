@@ -1,0 +1,105 @@
+# AtCoder Codon Environment
+
+**Python 3.13** と **[Codon](https://github.com/exaloop/codon)** (ハイパフォーマンスPythonコンパイラ) を使用して AtCoder の問題を解くための完全な開発環境です。
+
+**VS Code Dev Containers** で利用することを前提に設計されており、一般的な x86_64 PC から Apple Silicon (M1/M2/M3)搭載 Mac まで、一貫した環境を提供します。
+
+## 特徴
+
+- **🚀 Codon コンパイラ**: Pythonを書けば、C++並みの速度で動作します。インストール・設定済みです。
+- **📦 マルチアーキテクチャ対応**: Dockerイメージは `linux/amd64` (Intel/AMD) と `linux/arm64` (Apple Silicon) の両方をサポートしています。
+- **🛠️ 便利なツール群**:
+  - `atcoder-cli` (acc)
+  - `online-judge-tools` (oj)
+  - Python 3.13 & 標準ライブラリ
+  - 主要な競プロライブラリ: `ac-library-python`, `numpy`, `scipy`, `networkx`, `sortedcontainers`, `more-itertools` など
+- **🔒 ユーザデータの分離**: あなたのコードや設定ファイル(`user_data/`)はテンプレートから分離されているため、Privateリポジトリ等で安全に管理できます。
+
+## 前提条件
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) または Docker Engine
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [Dev Containers Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+
+## 始め方
+
+### 1. リポジトリのクローン
+
+```bash
+git clone https://github.com/liebe-magi/atcoder-codon.git
+cd atcoder-codon
+```
+
+### 2. 環境の初期化
+
+セットアップスクリプトを実行して、設定ファイルとコンテンツディレクトリを作成します。これにより、デフォルトのテンプレートが `user_data/` にコピーされます。
+
+```bash
+./user_setup.sh
+```
+
+> **Note**: `user_data/` ディレクトリは `.gitignore` に設定されています。このディレクトリ内で別途 `git init` などをすることで、この環境テンプレート自体は追従しつつ、自身の回答コードだけをPrivateリポジトリで管理することが可能です。
+
+### 3. VS Code で開く
+
+VS Code でリポジトリフォルダを開きます。「コンテナーで再度開く (Reopen in Container)」という通知が表示されたらクリックしてください。
+
+または：
+1.  `F1` (または `Cmd+Shift+P`) を押す
+2.  **Dev Containers: Reopen in Container** を選択
+
+VS Code が Docker イメージを取得し、環境を起動します。
+
+### 4. AtCoder へのログイン (初回のみ)
+
+コンテナ内のターミナルで以下を実行します：
+
+```bash
+# atcoder-cli へのログイン
+acc login
+
+# online-judge-tools へのログイン
+oj login https://atcoder.jp/
+```
+
+## 使い方
+
+### 1. コンテストディレクトリの作成
+
+```bash
+new abc300
+cd abc300/a
+```
+
+### 2. テストの実行
+
+```bash
+# 通常の Python として実行
+python main.py
+
+# oj tools を使ってテスト (tasks.json に設定済み)
+# VS Code の タスク: Terminal -> Run Task... -> Test
+```
+
+### 3. Codon でのコンパイル・実行
+
+```bash
+# コンパイルして実行
+codon run -release main.py
+
+# コンパイルのみ
+codon build -release -exe main.py
+./main
+```
+
+## ディレクトリ構成
+
+- `template/`: 設定ファイルのひな形などが格納されています。
+- `user_data/`: **[重要]** 実際の作業場所です。`setup.sh` によって作成されます。
+    - `user_data/config/`: ツールやテンプレートの設定ファイル。
+    - `user_data/contents/`: ソリューションコードが保存される場所。
+- `docker/`: Dockerfile やビルド設定。
+
+## カスタマイズについて
+
+テンプレート (`main.py` など) をカスタマイズしたい場合は、`user_data/config/` 内のファイルを編集してください。`user_data` はあなたの管理下にあるため、自由に変更して構いません。
