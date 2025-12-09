@@ -10,7 +10,7 @@ on:
 env:
   REGISTRY: docker.io
   # TODO: Update this to your Docker Hub username/repo
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: liebemagi/atcoder-codon
 
 jobs:
   build:
