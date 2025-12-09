@@ -1,8 +1,12 @@
 # AtCoder Codon Environment
 
+![AtCoder 2025 Language Update Compliant](https://img.shields.io/badge/AtCoder-2025_Update_Compliant-green)
+
 **Python 3.13** と **[Codon](https://github.com/exaloop/codon)** (ハイパフォーマンスPythonコンパイラ) を使用して AtCoder の問題を解くための完全な開発環境です。
 
 **VS Code Dev Containers** で利用することを前提に設計されており、一般的な x86_64 PC から Apple Silicon (M1/M2/M3)搭載 Mac まで、一貫した環境を提供します。
+
+> **Note**: 本環境は **AtCoder 2025年10月言語アップデート** (Python 3.13, 最新ライブラリ) に完全対応しています。
 
 ## 特徴
 
