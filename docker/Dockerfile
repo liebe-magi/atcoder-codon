@@ -10,10 +10,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libopenblas-dev liblapack-dev libgmp-dev libmpfr-dev libfftw3-dev \
     libbz2-dev libffi-dev libgdbm-dev libgdbm-compat-dev liblzma-dev \
     libncurses5-dev libreadline6-dev libsqlite3-dev libssl-dev \
-    lzma lzma-dev tk-dev uuid-dev zlib1g-dev llvm-bolt ansifilter \
+    lzma lzma-dev tk-dev uuid-dev zlib1g-dev ansifilter \
     && echo "ubuntu ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/ubuntu \
     && chmod 0440 /etc/sudoers.d/ubuntu \
     && rm -rf /var/lib/apt/lists/*
+
+ARG TARGETARCH
+RUN if [ "$TARGETARCH" = "amd64" ]; then \
+    apt-get update && apt-get install -y --no-install-recommends llvm-bolt && \
+    rm -rf /var/lib/apt/lists/*; \
+    fi
 
 # 2. Install Python 3.13
 RUN add-apt-repository ppa:deadsnakes/ppa -y && \
