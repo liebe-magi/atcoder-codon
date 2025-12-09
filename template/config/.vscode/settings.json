@@ -1,0 +1,21 @@
+{
+    "editor.formatOnSave": true,
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python"
+    },
+    "command-runner.commands": {
+        "codon build": "codon build -release -o ${fileDirname}/a.out ${file}",
+        "oj test": "oj t -c ${fileDirname}/a.out -d ${fileDirname}/tests",
+        "acc submit": "cd ${fileDirname} && acc submit ${file}"
+    },
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/__pycache__": true,
+        "**/*.pyc": true
+    }
+}

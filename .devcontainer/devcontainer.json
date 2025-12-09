@@ -1,0 +1,28 @@
+{
+    "name": "AtCoder Codon Environment",
+    "image": "liebemagi/atcoder-codon:latest",
+    "remoteUser": "ubuntu",
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:2": {}
+    },
+    "mounts": [
+        "source=${localWorkspaceFolder}/user_data/config/atcoder-cli-nodejs,target=/home/ubuntu/.config/atcoder-cli-nodejs,type=bind",
+        "source=${localWorkspaceFolder}/user_data/config/online-judge-tools,target=/home/ubuntu/.local/share/online-judge-tools,type=bind",
+        "source=${localWorkspaceFolder}/user_data/config/.vscode,target=/home/ubuntu/work/.vscode,type=bind"
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "edonet.vscode-command-runner"
+            ],
+            "settings": {
+                "python.defaultInterpreterPath": "/usr/bin/python3"
+            }
+        }
+    },
+    "workspaceMount": "source=${localWorkspaceFolder}/user_data/contents,target=/home/ubuntu/work/contents,type=bind",
+    "workspaceFolder": "/home/ubuntu/work",
+    "postCreateCommand": "bash ${localWorkspaceFolder}/user_setup.sh && sudo chown -R ubuntu:ubuntu /home/ubuntu/work /home/ubuntu/.config /home/ubuntu/.local && acc config-dir && acc check-oj"
+}
